@@ -7,21 +7,32 @@
 
 #import "ThinkingGameEngineApi.h"
 
+#if __has_include(<ThinkingSDK/ThinkingAnalyticsSDK.h>)
 #import <ThinkingSDK/ThinkingAnalyticsSDK.h>
+#endif
+
+
+#if __has_include("ThinkingAnalyticsSDK.h")
+#import "ThinkingAnalyticsSDK.h"
+#endif
 
 @implementation ThinkingGameEngineApi
 
 
 - (void)setCustomerLibInfo:(NSString *)libName libVersion:(NSString *)libVersion{
+    #if __has_include("ThinkingAnalyticsSDK.h") || __has_include(<ThinkingSDK/ThinkingAnalyticsSDK.h>)
     [ThinkingAnalyticsSDK setCustomerLibInfoWithLibName:libName libVersion:libVersion];
+    #endif
 }
 
 - (void)enableTrackLog:(BOOL)enableLog{
+    #if __has_include("ThinkingAnalyticsSDK.h") || __has_include(<ThinkingSDK/ThinkingAnalyticsSDK.h>)
     if(enableLog){
         [ThinkingAnalyticsSDK setLogLevel:TDLoggingLevelDebug];
     }else{
         [ThinkingAnalyticsSDK setLogLevel:TDLoggingLevelNone];
     }
+    #endif
 }
 
 - (void)calibrateTime:(NSTimeInterval)timeStampMillis{
@@ -33,10 +44,11 @@
 - (void)calibrateTimeWithNtp:(NSString *)ntpServer{
     #if __has_include("ThinkingAnalyticsSDK.h") || __has_include(<ThinkingSDK/ThinkingAnalyticsSDK.h>)
     [ThinkingAnalyticsSDK calibrateTimeWithNtp:ntpServer];
-    #endif/Users/liulongbing/Documents/github/ios-sdk/Example/ThirdParty/Podfile
+    #endif
 }
 
 - (void)sharedInstance:(NSString *)config{
+    #if __has_include("ThinkingAnalyticsSDK.h") || __has_include(<ThinkingSDK/ThinkingAnalyticsSDK.h>)
     @try {
         NSDictionary* options = [self dictionaryWithJsonString:config];
         NSString* appId = [options objectForKey:@"appId"];
@@ -68,6 +80,7 @@
     } @catch (NSException *exception) {
         NSLog(@"[ThinkingAnalyticsSDK] error:%@",exception);
     }
+    #endif
 }
 
 - (void)track:(NSString *)obj{
