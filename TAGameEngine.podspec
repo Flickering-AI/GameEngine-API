@@ -25,15 +25,17 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
+  TODO: Add long description of the pod here.
                    DESC
 
   spec.homepage     = "https://github.com/ThinkingDataAnalytics/GameEngine-API"
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { "liulongbing" => "liulongbing@thinkingdata.cn" }
-  s.source           = { :git => 'https://github.com/ThinkingDataAnalytics/GameEngine-API.git', :tag => "v#{s.version}" }
+  spec.license          = { :type => 'MIT', :file => 'LICENSE' }
+  spec.author           = { "liulongbing" => "liulongbing@thinkingdata.cn" }
+  spec.source           = { :git => 'https://github.com/ThinkingDataAnalytics/GameEngine-API.git', :tag => "v#{spec.version}" }
 
-  s.ios.deployment_target = '8.0'
+  spec.ios.deployment_target = '8.0'
 
-  spec.source_files  = "Classes", "engine/engine/**/*"
+  # spec.source_files  = "engine/engine/**/*"
+  spec.source_files = 'engine/engine/**/*'
 
 end
