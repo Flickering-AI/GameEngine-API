@@ -471,8 +471,8 @@
                 }else if([@"TradPlus" isEqualToString:value]){
                     types |= TAThirdPartyShareTypeTRADPLUS;
                 }
-                [instance enableThirdPartySharing:types];
             }
+            [instance enableThirdPartySharing:types];
         }else if([options objectForKey:@"type"]){
             NSString* type = [options objectForKey:@"type"];
             NSDictionary* params = [options objectForKey:@"params"];
@@ -630,6 +630,33 @@
     }
     #endif
     return @"";
+}
+
+- (void)setAutoTrackProperties:(NSString *)obj{
+    #if __has_include("ThinkingAnalyticsSDK.h") || __has_include(<ThinkingSDK/ThinkingAnalyticsSDK.h>)
+    @try {
+        NSDictionary* options = [self dictionaryWithJsonString:obj];
+        NSString* appId = [options objectForKey:@"appId"];
+        ThinkingAnalyticsSDK *instance = [self getCurrentInstance:appId];
+        NSArray *autoTrack = [options objectForKey:@"autoTrack"];
+        ThinkingAnalyticsAutoTrackEventType iOSAutoTrackType = ThinkingAnalyticsEventTypeNone;
+        for(int i=0; i < autoTrack.count; i++) {
+            NSString* value = autoTrack[i];
+            if ([value isEqualToString:@"appInstall"]) {
+                iOSAutoTrackType |= ThinkingAnalyticsEventTypeAppInstall;
+            } else if ([value isEqualToString:@"appStart"]) {
+                iOSAutoTrackType |= ThinkingAnalyticsEventTypeAppStart;
+            } else if ([value isEqualToString:@"appEnd"]) {
+                iOSAutoTrackType |= ThinkingAnalyticsEventTypeAppEnd;
+            } else if ([value isEqualToString:@"appCrash"]) {
+                iOSAutoTrackType |= ThinkingAnalyticsEventTypeAppViewCrash;
+            }
+        }
+        [instance setAutoTrackProperties:iOSAutoTrackType properties:[options objectForKey:@"properties"]];
+    } @catch (NSException *exception) {
+        NSLog(@"[ThinkingAnalyticsSDK] error:%@",exception);
+    }
+    #endif
 }
 
 #if __has_include("ThinkingAnalyticsSDK.h") || __has_include(<ThinkingSDK/ThinkingAnalyticsSDK.h>)
