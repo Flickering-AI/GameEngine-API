@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "TAGameEngine"
-  spec.version      = "0.3.0"
+  spec.version      = "0.4.0"
   spec.summary      = "A short description of TAGameEngine."
 
   # This description is used to generate tags and improve search results.
@@ -33,7 +33,7 @@ Pod::Spec.new do |spec|
   spec.author           = { "liulongbing" => "liulongbing@thinkingdata.cn" }
   spec.source           = { :git => 'https://github.com/ThinkingDataAnalytics/GameEngine-API.git', :tag => "v#{spec.version}" }
 
-  spec.ios.deployment_target = '8.0'
+  spec.ios.deployment_target = '11.0'
 
   spec.source_files = 'engine/engine/**/*'
   spec.dependency "ThinkingSDK", '2.8.3.2'
