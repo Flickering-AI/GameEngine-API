@@ -36,6 +36,6 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target = '11.0'
 
   spec.source_files = 'engine/engine/**/*'
-  spec.dependency "ThinkingSDK", '2.8.3.2'
+  spec.dependency "ThinkingSDK"
 
 end
